@@ -1,0 +1,110 @@
+---
+import ConverterPanel from "../components/ConverterPanel";
+import DownloadPanel from "../components/DownloadPanel";
+import Layout from "../layouts/Layout.astro";
+
+const creemBasic = import.meta.env.PUBLIC_CREEM_BASIC_URL || "#";
+const creemPro = import.meta.env.PUBLIC_CREEM_PRO_URL || "#";
+const creemLifetime = import.meta.env.PUBLIC_CREEM_LIFETIME_URL || "#";
+---
+
+<Layout
+  lang="zh-CN"
+  title="any2md | 在线转换与桌面版下载"
+  description="在线免费转换，免费下载 exe，付费自动发序列号。"
+>
+  <main class="page-wrap">
+    <section class="hero reveal">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-badge">在线免费体验 · 桌面版授权升级</span>
+          <h1>把文档变成可发布的 Markdown，速度快，结构稳。</h1>
+          <p>
+            any2md 支持常见办公文档转换。你可以先在线免费体验，再下载桌面版。每台设备免费 20
+            次，付费后系统自动把序列号发送到你的邮箱。
+          </p>
+          <div class="action-row">
+            <a class="btn btn-primary" href="#convert">立即在线转换</a>
+            <a class="btn btn-ghost" href="#download">下载 EXE</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>20 次</strong>免费试用配额/设备</div>
+            <div class="stat"><strong>2 分钟</strong>内完成支付发码</div>
+            <div class="stat"><strong>14+ 格式</strong>分批接入计划</div>
+          </div>
+        </div>
+        <div class="surface" style="padding: 1rem; align-self: start;">
+          <h3 style="margin-top: 0">流程说明</h3>
+          <ol style="margin: 0; padding-left: 1.1rem; color: var(--ink-soft)">
+            <li>先在线上传文件，快速预览转换质量。</li>
+            <li>下载 exe，离线转换更稳定，支持批量。</li>
+            <li>在价格区选择套餐，通过 Creem 支付。</li>
+            <li>支付成功后，AppLicense 自动发序列号到邮箱。</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="convert">
+      <ConverterPanel client:load lang="zh-CN" />
+    </section>
+
+    <section id="download">
+      <DownloadPanel client:load lang="zh-CN" />
+    </section>
+
+    <section class="surface section reveal" style="animation-delay: 320ms;" id="pricing">
+      <h2>授权套餐</h2>
+      <p style="margin-top: 0; color: var(--ink-soft)">
+        套餐按有效期与可绑定设备数区分。支付成功将自动发码到付款邮箱。
+      </p>
+      <div class="plan-grid">
+        <article class="plan">
+          <h3>基础版</h3>
+          <div class="price">¥39</div>
+          <ul>
+            <li>30 天有效</li>
+            <li>1 台设备绑定</li>
+            <li>邮件自动发码</li>
+          </ul>
+          <a class="btn btn-ghost" href={creemBasic} target="_blank" rel="noreferrer">立即购买</a>
+        </article>
+
+        <article class="plan" style="border-color: #0e8a72; background: #f2fff9;">
+          <h3>专业版</h3>
+          <div class="price">¥129</div>
+          <ul>
+            <li>365 天有效</li>
+            <li>2 台设备绑定</li>
+            <li>优先邮件支持</li>
+          </ul>
+          <a class="btn btn-primary" href={creemPro} target="_blank" rel="noreferrer">立即购买</a>
+        </article>
+
+        <article class="plan">
+          <h3>永久版</h3>
+          <div class="price">¥269</div>
+          <ul>
+            <li>永久有效</li>
+            <li>3 台设备绑定</li>
+            <li>可手动补发序列号</li>
+          </ul>
+          <a class="btn btn-ghost" href={creemLifetime} target="_blank" rel="noreferrer">立即购买</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section reveal" style="animation-delay: 380ms;">
+      <h2>常见问题</h2>
+      <div style="display: grid; gap: 0.7rem; color: var(--ink-soft)">
+        <div><strong>在线免费版限制？</strong> 每台设备总计 20 次，适合先评估效果。</div>
+        <div><strong>支付后多久收到序列号？</strong> 正常情况下 2 分钟内邮件送达。</div>
+        <div><strong>收不到邮件怎么办？</strong> 检查垃圾箱后可联系支持人工补发。</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      © {new Date().getFullYear()} any2md. Built for fast conversion, stable output, and clear licensing.
+    </footer>
+  </main>
+</Layout>

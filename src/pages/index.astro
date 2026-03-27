@@ -1,0 +1,33 @@
+---
+import { LANG_STORAGE_KEY } from "../config/constants";
+const langStorageKey = LANG_STORAGE_KEY;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>any2md</title>
+    <script define:vars={{ langStorageKey }}>
+      (function redirectByLocale() {
+        const storageKey = langStorageKey;
+        const query = new URLSearchParams(window.location.search);
+        const fromQuery = query.get("lang");
+        const saved = window.localStorage.getItem(storageKey);
+        const detected = (fromQuery || saved || navigator.language || "en").toLowerCase();
+
+        const target = detected.startsWith("zh") ? "/zh/" : "/en/";
+        if (fromQuery === "zh" || fromQuery === "en") {
+          window.localStorage.setItem(storageKey, fromQuery);
+        }
+
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+    <p><a href="/zh/">中文</a> | <a href="/en/">English</a></p>
+  </body>
+</html>

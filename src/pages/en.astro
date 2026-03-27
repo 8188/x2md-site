@@ -1,0 +1,110 @@
+---
+import ConverterPanel from "../components/ConverterPanel";
+import DownloadPanel from "../components/DownloadPanel";
+import Layout from "../layouts/Layout.astro";
+
+const creemBasic = import.meta.env.PUBLIC_CREEM_BASIC_URL || "#";
+const creemPro = import.meta.env.PUBLIC_CREEM_PRO_URL || "#";
+const creemLifetime = import.meta.env.PUBLIC_CREEM_LIFETIME_URL || "#";
+---
+
+<Layout
+  lang="en-US"
+  title="any2md | Online Conversion and Desktop Download"
+  description="Free online conversion and desktop EXE download. License keys are emailed automatically after payment."
+>
+  <main class="page-wrap">
+    <section class="hero reveal">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-badge">Free Online Trial · Desktop License Upgrade</span>
+          <h1>Convert documents into publish-ready Markdown fast and reliably.</h1>
+          <p>
+            any2md supports common office document formats. Try it online first, then download the desktop app.
+            Each device gets 20 free uses. After purchase, your license key is sent automatically by email.
+          </p>
+          <div class="action-row">
+            <a class="btn btn-primary" href="#convert">Start Converting</a>
+            <a class="btn btn-ghost" href="#download">Download EXE</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>20 uses</strong>free trial quota per device</div>
+            <div class="stat"><strong>2 minutes</strong>typical delivery after payment</div>
+            <div class="stat"><strong>14+ formats</strong>planned in phased rollout</div>
+          </div>
+        </div>
+        <div class="surface" style="padding: 1rem; align-self: start;">
+          <h3 style="margin-top: 0">How It Works</h3>
+          <ol style="margin: 0; padding-left: 1.1rem; color: var(--ink-soft)">
+            <li>Upload a file online to quickly preview conversion quality.</li>
+            <li>Download the EXE for more stable offline and batch conversion.</li>
+            <li>Choose a plan in pricing and pay via Creem.</li>
+            <li>After successful payment, AppLicense emails your license key automatically.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="convert">
+      <ConverterPanel client:load lang="en-US" />
+    </section>
+
+    <section id="download">
+      <DownloadPanel client:load lang="en-US" />
+    </section>
+
+    <section class="surface section reveal" style="animation-delay: 320ms;" id="pricing">
+      <h2>License Plans</h2>
+      <p style="margin-top: 0; color: var(--ink-soft)">
+        Plans differ by validity period and number of bindable devices. A license key is emailed automatically after payment.
+      </p>
+      <div class="plan-grid">
+        <article class="plan">
+          <h3>Basic</h3>
+          <div class="price">¥39</div>
+          <ul>
+            <li>30-day validity</li>
+            <li>1 device binding</li>
+            <li>Automatic email delivery</li>
+          </ul>
+          <a class="btn btn-ghost" href={creemBasic} target="_blank" rel="noreferrer">Buy Now</a>
+        </article>
+
+        <article class="plan" style="border-color: #0e8a72; background: #f2fff9;">
+          <h3>Pro</h3>
+          <div class="price">¥129</div>
+          <ul>
+            <li>365-day validity</li>
+            <li>2 device bindings</li>
+            <li>Priority email support</li>
+          </ul>
+          <a class="btn btn-primary" href={creemPro} target="_blank" rel="noreferrer">Buy Now</a>
+        </article>
+
+        <article class="plan">
+          <h3>Lifetime</h3>
+          <div class="price">¥269</div>
+          <ul>
+            <li>Perpetual validity</li>
+            <li>3 device bindings</li>
+            <li>Manual resend available</li>
+          </ul>
+          <a class="btn btn-ghost" href={creemLifetime} target="_blank" rel="noreferrer">Buy Now</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="surface section reveal" style="animation-delay: 380ms;">
+      <h2>FAQ</h2>
+      <div style="display: grid; gap: 0.7rem; color: var(--ink-soft)">
+        <div><strong>What is the free limit?</strong> 20 uses per device for evaluation.</div>
+        <div><strong>How soon after payment will I get a key?</strong> Usually within 2 minutes by email.</div>
+        <div><strong>What if I do not receive the email?</strong> Check spam first, then contact support for manual resend.</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      © {new Date().getFullYear()} any2md. Built for fast conversion, stable output, and clear licensing.
+    </footer>
+  </main>
+</Layout>
