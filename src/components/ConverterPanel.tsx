@@ -314,8 +314,8 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
       <p style={{ marginTop: 0, color: "var(--ink-soft)" }}>
         {t(
           lang,
-          "免费版每台设备总计 20 次。支持点击选择或拖拽上传，支持手动选择目标格式并下载结果。",
-          "Free tier includes 20 uses per device. Select files by click or drag-and-drop, choose target format, and download results."
+          "每台设备 20 次试用。支持拖拽或点击上传，选择目标格式后自动转换。完全免费不需激活码。",
+          "20 free uses per device. Drag or click to upload, select target format, and download. No license required for trial."
         )}
       </p>
 
@@ -478,7 +478,7 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
           </div>
         </div>
 
-        <div className="surface" style={{ padding: "1rem" }}>
+        <div className="surface" style={{ padding: "1rem", display: "flex", flexDirection: "column", height: "100%" }}>
           <div style={{ fontWeight: 700, marginBottom: "0.65rem" }}>{t(lang, "转换结果", "Conversion Result")}</div>
           <textarea
             value={result}
@@ -489,6 +489,7 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
               "Markdown text appears here when target is Markdown. For DOCX/PDF, click Download."
             )}
             style={{
+              flex: 1,
               width: "100%",
               minHeight: "240px",
               border: "1px solid var(--border)",

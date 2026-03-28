@@ -28,9 +28,42 @@ const {
 			href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Sans:wght@400;500;700&display=swap"
 			rel="stylesheet"
 		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+		<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js" defer></script>
 		<title>{title}</title>
 	</head>
 	<body>
+		<div id="vanta-bg" aria-hidden="true"></div>
 		<slot />
+		<script>
+			(function initVantaBirds() {
+				const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				const lowPower = (navigator.hardwareConcurrency || 4) <= 4;
+				const smallScreen = window.innerWidth < 992;
+				if (reducedMotion || lowPower || smallScreen) return;
+
+				let effect = null;
+				const mount = () => {
+					if (effect || !window.VANTA || !window.VANTA.BIRDS) return;
+					effect = window.VANTA.BIRDS({
+						el: "#vanta-bg",
+						mouseControls: true,
+						touchControls: true,
+						gyroControls: false,
+						minHeight: 200.0,
+						minWidth: 200.0,
+						scale: 1.0,
+						scaleMobile: 1.0,
+					});
+				};
+
+				window.addEventListener("load", mount, { once: true });
+				setTimeout(mount, 1000);
+
+				window.addEventListener("beforeunload", () => {
+					if (effect) effect.destroy();
+				});
+			})();
+		</script>
 	</body>
 </html>

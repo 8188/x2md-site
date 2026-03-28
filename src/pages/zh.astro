@@ -1,16 +1,22 @@
 ---
 import ConverterPanel from "../components/ConverterPanel";
 import DownloadPanel from "../components/DownloadPanel";
+import { CONTACT_EMAIL, PRICING_PLANS } from "../config/constants";
 import Layout from "../layouts/Layout.astro";
 
 const creemBasic = import.meta.env.PUBLIC_CREEM_BASIC_URL || "#";
 const creemPro = import.meta.env.PUBLIC_CREEM_PRO_URL || "#";
 const creemLifetime = import.meta.env.PUBLIC_CREEM_LIFETIME_URL || "#";
+const checkoutUrls = [creemBasic, creemPro, creemLifetime];
+const plans = PRICING_PLANS.map((plan, index) => ({
+  ...plan,
+  checkoutUrl: checkoutUrls[index] || "#",
+}));
 ---
 
 <Layout
   lang="zh-CN"
-  title="any2md | 在线转换与桌面版下载"
+  title="X2MD | 在线文档转换 · Markdown 格式化工具"
   description="在线免费转换，免费下载 exe，付费自动发序列号。"
 >
   <main class="page-wrap">
@@ -18,10 +24,9 @@ const creemLifetime = import.meta.env.PUBLIC_CREEM_LIFETIME_URL || "#";
       <div class="hero-grid">
         <div>
           <span class="hero-badge">在线免费体验 · 桌面版授权升级</span>
-          <h1>把文档变成可发布的 Markdown，速度快，结构稳。</h1>
+          <h1>文档转 Markdown，一键完成。</h1>
           <p>
-            any2md 支持常见办公文档转换。你可以先在线免费体验，再下载桌面版。每台设备免费 20
-            次，付费后系统自动把序列号发送到你的邮箱。
+            X2MD 支持 DOCX、PPTX、Excel 等常见格式。在线免费预览，下载桌面版离线使用。每台设备 20 次试用，付费后自动发码到邮箱。
           </p>
           <div class="action-row">
             <a class="btn btn-primary" href="#convert">立即在线转换</a>
@@ -36,10 +41,10 @@ const creemLifetime = import.meta.env.PUBLIC_CREEM_LIFETIME_URL || "#";
         <div class="surface" style="padding: 1rem; align-self: start;">
           <h3 style="margin-top: 0">流程说明</h3>
           <ol style="margin: 0; padding-left: 1.1rem; color: var(--ink-soft)">
-            <li>先在线上传文件，快速预览转换质量。</li>
-            <li>下载 exe，离线转换更稳定，支持批量。</li>
-            <li>在价格区选择套餐，通过 Creem 支付。</li>
-            <li>支付成功后，AppLicense 自动发序列号到邮箱。</li>
+            <li>在线上传，即时预览转换效果</li>
+            <li>下载桌面版（GUI 或 CLI），离线使用</li>
+            <li>选择套餐，通过 Creem 支付</li>
+            <li>付款成功 → 自动发码到邮箱</li>
           </ol>
         </div>
       </div>
@@ -59,38 +64,23 @@ const creemLifetime = import.meta.env.PUBLIC_CREEM_LIFETIME_URL || "#";
         套餐按有效期与可绑定设备数区分。支付成功将自动发码到付款邮箱。
       </p>
       <div class="plan-grid">
-        <article class="plan">
-          <h3>基础版</h3>
-          <div class="price">¥39</div>
-          <ul>
-            <li>30 天有效</li>
-            <li>1 台设备绑定</li>
-            <li>邮件自动发码</li>
-          </ul>
-          <a class="btn btn-ghost" href={creemBasic} target="_blank" rel="noreferrer">立即购买</a>
-        </article>
-
-        <article class="plan" style="border-color: #0e8a72; background: #f2fff9;">
-          <h3>专业版</h3>
-          <div class="price">¥129</div>
-          <ul>
-            <li>365 天有效</li>
-            <li>2 台设备绑定</li>
-            <li>优先邮件支持</li>
-          </ul>
-          <a class="btn btn-primary" href={creemPro} target="_blank" rel="noreferrer">立即购买</a>
-        </article>
-
-        <article class="plan">
-          <h3>永久版</h3>
-          <div class="price">¥269</div>
-          <ul>
-            <li>永久有效</li>
-            <li>3 台设备绑定</li>
-            <li>可手动补发序列号</li>
-          </ul>
-          <a class="btn btn-ghost" href={creemLifetime} target="_blank" rel="noreferrer">立即购买</a>
-        </article>
+        {
+          plans.map((plan) => (
+            <article class={`plan${plan.highlight ? " plan-highlight" : ""}`}>
+              <h3>{plan.name_zh}</h3>
+              <div class="price-row">
+                <span class="price-old">${plan.price_old}</span>
+                <span class="price">${plan.price}</span>
+              </div>
+              <ul>
+                <li>{plan.days > 0 ? `${plan.days} 天有效` : "永久有效"}</li>
+                <li>{`${plan.devices} 台设备绑定`}</li>
+                <li>邮件自动发码</li>
+              </ul>
+              <a class={`btn ${plan.highlight ? "btn-primary" : "btn-ghost"}`} href={plan.checkoutUrl} target="_blank" rel="noreferrer">立即购买</a>
+            </article>
+          ))
+        }
       </div>
     </section>
 
@@ -99,12 +89,13 @@ const creemLifetime = import.meta.env.PUBLIC_CREEM_LIFETIME_URL || "#";
       <div style="display: grid; gap: 0.7rem; color: var(--ink-soft)">
         <div><strong>在线免费版限制？</strong> 每台设备总计 20 次，适合先评估效果。</div>
         <div><strong>支付后多久收到序列号？</strong> 正常情况下 2 分钟内邮件送达。</div>
-        <div><strong>收不到邮件怎么办？</strong> 检查垃圾箱后可联系支持人工补发。</div>
+        <div><strong>数据隐私如何保障？</strong> 我们绝对不存储您的文件信息。</div>
+        <div><strong>如有其他问题？</strong> 联系我们：<a href={`mailto:${CONTACT_EMAIL}`} style="color: var(--brand); text-decoration: none; font-weight: 500;">{CONTACT_EMAIL}</a></div>
       </div>
     </section>
 
     <footer class="footer">
-      © {new Date().getFullYear()} any2md. Built for fast conversion, stable output, and clear licensing.
+      © {new Date().getFullYear()} X2MD. Fast document conversion to Markdown, stable output, clear licensing.
     </footer>
   </main>
 </Layout>

@@ -1,15 +1,15 @@
 :root {
-  --bg: #f6f1e8;
-  --bg-alt: #ece3d3;
+  --bg: #f7f4ec;
+  --bg-alt: #e9e0cf;
   --ink: #1b1f26;
-  --ink-soft: #4b5563;
+  --ink-soft: #4f5968;
   --brand: #0e8a72;
   --brand-strong: #0a6a57;
-  --warm: #f4b253;
+  --warm: #ec9a2f;
   --danger: #bf4539;
-  --card: #fffdf8;
-  --border: #d4c9b7;
-  --shadow: 0 16px 35px rgba(20, 24, 33, 0.12);
+  --card: #fffcf5;
+  --border: #d8ccb9;
+  --shadow: 0 22px 42px rgba(20, 24, 33, 0.13);
 }
 
 * {
@@ -25,11 +25,26 @@ body {
 body {
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
   color: var(--ink);
+  position: relative;
+  overflow-x: hidden;
   background:
-    radial-gradient(circle at 20% 0%, #ffe7bd 0%, rgba(255, 231, 189, 0) 34%),
-    radial-gradient(circle at 85% 12%, #b7f3df 0%, rgba(183, 243, 223, 0) 37%),
-    linear-gradient(160deg, var(--bg) 0%, var(--bg-alt) 100%);
+    radial-gradient(circle at 12% 0%, #ffdca6 0%, rgba(255, 220, 166, 0) 38%),
+    radial-gradient(circle at 88% 12%, #b4ecd7 0%, rgba(180, 236, 215, 0) 34%),
+    linear-gradient(158deg, var(--bg) 0%, var(--bg-alt) 100%);
   min-height: 100vh;
+}
+
+#vanta-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.page-wrap {
+  position: relative;
+  z-index: 2;
 }
 
 h1,
@@ -50,7 +65,7 @@ a {
 }
 
 .hero {
-  padding: 3.6rem 0 2.4rem;
+  padding: 4rem 0 2.6rem;
 }
 
 .hero-grid {
@@ -63,7 +78,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: #fff4df;
+  background: linear-gradient(110deg, #fff2d8 0%, #f7ffef 100%);
   border: 1px solid #ebd1a5;
   border-radius: 999px;
   padding: 0.3rem 0.8rem;
@@ -75,7 +90,7 @@ a {
 .hero h1 {
   margin: 0;
   font-size: clamp(2rem, 3.6vw, 3.4rem);
-  line-height: 1.08;
+  line-height: 1.05;
 }
 
 .hero p {
@@ -102,6 +117,7 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .btn-primary {
@@ -112,11 +128,18 @@ a {
 
 .btn-primary:hover {
   background: var(--brand-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 18px rgba(9, 107, 89, 0.28);
 }
 
 .btn-ghost {
   background: #fff;
   border: 1px solid var(--border);
+}
+
+.btn-ghost:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 16px rgba(20, 24, 33, 0.1);
 }
 
 .hero-stats {
@@ -127,7 +150,7 @@ a {
 }
 
 .stat {
-  background: var(--card);
+  background: linear-gradient(150deg, #fffdf8 0%, #fff9eb 100%);
   border: 1px solid var(--border);
   border-radius: 0.85rem;
   padding: 0.8rem;
@@ -139,10 +162,11 @@ a {
 }
 
 .surface {
-  background: var(--card);
+  background: linear-gradient(170deg, var(--card) 0%, #fff9ea 100%);
   border: 1px solid var(--border);
   border-radius: 1rem;
   box-shadow: var(--shadow);
+  backdrop-filter: blur(1.5px);
 }
 
 .section {
@@ -170,8 +194,19 @@ a {
 .plan {
   border: 1px solid var(--border);
   border-radius: 0.85rem;
-  background: #fff;
+  background: #fffef9;
   padding: 1rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.plan:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(20, 24, 33, 0.12);
+}
+
+.plan-highlight {
+  border-color: #0e8a72;
+  background: linear-gradient(165deg, #f4fff8 0%, #ecfff6 100%);
 }
 
 .plan h3 {
@@ -179,10 +214,23 @@ a {
   font-size: 1.1rem;
 }
 
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.price-old {
+  color: #8f95a1;
+  text-decoration: line-through;
+  font-weight: 600;
+}
+
 .plan .price {
   margin-top: 0.35rem;
   font-size: 1.7rem;
   font-weight: 900;
+  color: #0c7e68;
 }
 
 .plan ul {
@@ -213,6 +261,10 @@ a {
 }
 
 @media (max-width: 960px) {
+  #vanta-bg {
+    display: none;
+  }
+
   .hero-grid,
   .grid-2,
   .plan-grid {

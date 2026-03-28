@@ -1,13 +1,56 @@
 /**
- * any2md-site Ç°¶ËÒ³ÃæµÄ¼¯ÖĞÅäÖÃÖĞĞÄ
- * °üº¬×ª»» API µØÖ·¡¢°æ±¾¼ì²é½Ó¿Ú¼°±¾µØ´æ´¢¼üÃû
+ * X2MD å‰ç«¯é¡µé¢çš„é›†ä¸­é…ç½®ä¸­å¿ƒ
+ * åŒ…å«ä¸‹è½½é“¾æ¥ã€å¥—é¤é…ç½®ã€è½¬æ¢ API åœ°å€åŠæœ¬åœ°å­˜å‚¨é”®å
  */
 
-/** ×ª»»·şÎñµÄ»ù´¡ API µØÖ·£¨Áô¿ÕÔòÄ¬ÈÏÊ¹ÓÃÏà¶ÔÂ·¾¶£© */
+/** è½¬æ¢æœåŠ¡çš„åŸºç¡€ API åœ°å€ï¼ˆç•™ç©ºåˆ™é»˜è®¤ä½¿ç”¨ç›¸å¯¹è·¯å¾„ï¼‰ */
 export const DEFAULT_CONVERT_API_BASE = "";
 
-/** »ñÈ¡°æ±¾·¢²¼ĞÅÏ¢µÄÔ¶³Ì½Ó¿ÚµØÖ· */
-export const DEFAULT_RELEASES_API = "https://versioncontrol-worker.posuiredstar.workers.dev/api/releases";
+/** å­˜å‚¨ç”¨æˆ·è¯­è¨€åå¥½çš„ LocalStorage é”®å */
+export const LANG_STORAGE_KEY = "x2md_lang";
 
-/** ´æ´¢ÓÃ»§ÓïÑÔÆ«ºÃµÄ LocalStorage ¼üÃû */
-export const LANG_STORAGE_KEY = "any2md_lang";
+/** è”ç³»é‚®ç®± */
+export const CONTACT_EMAIL = "jsy444@yeah.net";
+
+/** EXE ä¸‹è½½é“¾æ¥ */
+export const DOWNLOAD_URLS = {
+  portable: {
+    version: "latest",
+    url: "https://pub-6956b8ec162a4b9ab00d059bd5a042be.r2.dev/releases/any2md-0.1.0-x64-portable.exe",
+  },
+  cli: {
+    version: "latest",
+    url: "https://pub-6956b8ec162a4b9ab00d059bd5a042be.r2.dev/releases/any2md-0.1.0-x64-portable-cli.exe",
+  },
+};
+
+/** æˆæƒå¥—é¤é…ç½® */
+export const PRICING_PLANS = [
+  {
+    name_zh: "åŸºç¡€ç‰ˆ",
+    name_en: "Basic",
+    price: 4.9,
+    price_old: 10,
+    days: 30,
+    devices: 1,
+    highlight: false,
+  },
+  {
+    name_zh: "ä¸“ä¸šç‰ˆ",
+    name_en: "Pro",
+    price: 19.9,
+    price_old: 40,
+    days: 365,
+    devices: 2,
+    highlight: true,
+  },
+  {
+    name_zh: "æ°¸ä¹…ç‰ˆ",
+    name_en: "Lifetime",
+    price: 39.9,
+    price_old: 100,
+    days: 0, // 0 means perpetual
+    devices: 3,
+    highlight: false,
+  },
+];
