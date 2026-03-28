@@ -1,6 +1,12 @@
----
+﻿---
 import { LANG_STORAGE_KEY } from "../config/constants";
+
 const langStorageKey = LANG_STORAGE_KEY;
+const alternateLinks = [
+  { hreflang: "en", href: "/en/" },
+  { hreflang: "zh-CN", href: "/zh/" },
+  { hreflang: "x-default", href: "/en/" },
+];
 ---
 
 <!doctype html>
@@ -8,7 +14,13 @@ const langStorageKey = LANG_STORAGE_KEY;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>any2md</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <title>X2MD</title>
+    {
+      alternateLinks.map((link) => (
+        <link rel="alternate" hreflang={link.hreflang} href={link.href} />
+      ))
+    }
     <script define:vars={{ langStorageKey }}>
       (function redirectByLocale() {
         const storageKey = langStorageKey;

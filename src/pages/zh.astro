@@ -1,4 +1,4 @@
----
+﻿---
 import ConverterPanel from "../components/ConverterPanel";
 import DownloadPanel from "../components/DownloadPanel";
 import { CONTACT_EMAIL, PRICING_PLANS } from "../config/constants";
@@ -12,39 +12,100 @@ const plans = PRICING_PLANS.map((plan, index) => ({
   ...plan,
   checkoutUrl: checkoutUrls[index] || "#",
 }));
+
+const alternateLinks = [
+  { hreflang: "zh-CN", href: "/zh/" },
+  { hreflang: "en", href: "/en/" },
+  { hreflang: "x-default", href: "/en/" },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "X2MD",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Windows",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      description: "支持在线免费试用与桌面端下载。",
+    },
+    description: "在线将文档转换为 Markdown，并支持 Windows 桌面离线转换。",
+    inLanguage: "zh-CN",
+    url: "/zh/",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: "zh-CN",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "免费额度是多少？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "每台设备可免费试用 20 次。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "支付后多久收到授权码？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "通常 2 分钟内会通过邮件自动发送。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "文件会被保存吗？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "不会，我们不保存你的文件信息。",
+        },
+      },
+    ],
+  },
+];
 ---
 
 <Layout
   lang="zh-CN"
-  title="X2MD | 在线文档转换 · Markdown 格式化工具"
-  description="在线免费转换，免费下载 exe，付费自动发序列号。"
+  title="X2MD | 在线文档转 Markdown 工具"
+  description="支持 DOCX、PPTX、PDF 等文档在线转 Markdown。可下载 Windows EXE 离线使用，支付后授权码自动邮件发送。"
+  canonicalPath="/zh/"
+  keywords="文档转markdown, markdown转换器, docx转markdown, pptx转markdown, 在线转换, x2md"
+  alternateLinks={alternateLinks}
+  structuredData={structuredData}
 >
   <main class="page-wrap">
     <section class="hero reveal">
       <div class="hero-grid">
         <div>
-          <span class="hero-badge">在线免费体验 · 桌面版授权升级</span>
-          <h1>文档转 Markdown，一键完成。</h1>
+          <span class="hero-badge">在线免费试用 · 桌面端授权升级</span>
+          <h1>一键将文档转换为 Markdown</h1>
           <p>
-            X2MD 支持 DOCX、PPTX、Excel 等常见格式。在线免费预览，下载桌面版离线使用。每台设备 20 次试用，付费后自动发码到邮箱。
+            X2MD 支持 DOCX、PPTX、Excel 等常见格式。可先在线免费体验，再下载桌面版离线使用。
+            每台设备可试用 20 次，支付后授权码自动发送到邮箱。
           </p>
           <div class="action-row">
             <a class="btn btn-primary" href="#convert">立即在线转换</a>
             <a class="btn btn-ghost" href="#download">下载 EXE</a>
           </div>
           <div class="hero-stats">
-            <div class="stat"><strong>20 次</strong>免费试用配额/设备</div>
-            <div class="stat"><strong>2 分钟</strong>内完成支付发码</div>
-            <div class="stat"><strong>14+ 格式</strong>分批接入计划</div>
+            <div class="stat"><strong>20 次</strong>每台设备免费试用</div>
+            <div class="stat"><strong>2 分钟</strong>支付后常见发码时间</div>
+            <div class="stat"><strong>14+ 格式</strong>分阶段持续支持</div>
           </div>
         </div>
         <div class="surface" style="padding: 1rem; align-self: start;">
-          <h3 style="margin-top: 0">流程说明</h3>
+          <h3 style="margin-top: 0">使用流程</h3>
           <ol style="margin: 0; padding-left: 1.1rem; color: var(--ink-soft)">
-            <li>在线上传，即时预览转换效果</li>
-            <li>下载桌面版（GUI 或 CLI），离线使用</li>
-            <li>选择套餐，通过 Creem 支付</li>
-            <li>付款成功 → 自动发码到邮箱</li>
+            <li>上传文档并实时预览转换结果</li>
+            <li>下载桌面版（GUI/CLI）离线使用</li>
+            <li>选择套餐并通过 Creem 支付</li>
+            <li>支付成功后自动邮件发放授权码</li>
           </ol>
         </div>
       </div>
@@ -61,7 +122,7 @@ const plans = PRICING_PLANS.map((plan, index) => ({
     <section class="surface section reveal" style="animation-delay: 320ms;" id="pricing">
       <h2>授权套餐</h2>
       <p style="margin-top: 0; color: var(--ink-soft)">
-        套餐按有效期与可绑定设备数区分。支付成功将自动发码到付款邮箱。
+        套餐按照有效期与可绑定设备数量区分。支付成功后，授权码会自动发送到支付邮箱。
       </p>
       <div class="plan-grid">
         {
@@ -88,14 +149,14 @@ const plans = PRICING_PLANS.map((plan, index) => ({
       <h2>常见问题</h2>
       <div style="display: grid; gap: 0.7rem; color: var(--ink-soft)">
         <div><strong>在线免费版限制？</strong> 每台设备总计 20 次，适合先评估效果。</div>
-        <div><strong>支付后多久收到序列号？</strong> 正常情况下 2 分钟内邮件送达。</div>
-        <div><strong>数据隐私如何保障？</strong> 我们绝对不存储您的文件信息。</div>
-        <div><strong>如有其他问题？</strong> 联系我们：<a href={`mailto:${CONTACT_EMAIL}`} style="color: var(--brand); text-decoration: none; font-weight: 500;">{CONTACT_EMAIL}</a></div>
+        <div><strong>支付后多久收到授权码？</strong> 通常 2 分钟内邮件送达。</div>
+        <div><strong>数据隐私如何保障？</strong> 我们不会保存你的文件信息。</div>
+        <div><strong>还有问题？</strong> 联系我们：<a href={`mailto:${CONTACT_EMAIL}`} style="color: var(--brand); text-decoration: none; font-weight: 500;">{CONTACT_EMAIL}</a></div>
       </div>
     </section>
 
     <footer class="footer">
-      © {new Date().getFullYear()} X2MD. Fast document conversion to Markdown, stable output, clear licensing.
+      © {new Date().getFullYear()} X2MD。稳定、快速的文档转 Markdown 方案。
     </footer>
   </main>
 </Layout>

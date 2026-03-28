@@ -1,17 +1,38 @@
 ---
 import "../styles/global.css";
+import { DEFAULT_ADSENSE_CLIENT, DEFAULT_ADSENSE_SCRIPT_BASE } from "../config/constants";
 
 interface Props {
 	title?: string;
 	description?: string;
 	lang?: "zh-CN" | "en-US";
+	canonicalPath?: string;
+	keywords?: string;
+	noindex?: boolean;
+	ogType?: "website" | "article";
+	alternateLinks?: Array<{ hreflang: string; href: string }>;
+	structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 const {
 	title = "any2md | Online Conversion and Desktop License",
 	description = "Free online conversion and desktop download. License key is sent by email after purchase.",
 	lang = "en-US",
+	canonicalPath = "/",
+	keywords,
+	noindex = false,
+	ogType = "website",
+	alternateLinks = [],
+	structuredData,
 } = Astro.props;
+
+const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT || DEFAULT_ADSENSE_CLIENT;
+const adsenseScriptSrc = import.meta.env.PUBLIC_ADSENSE_SCRIPT_SRC || `${DEFAULT_ADSENSE_SCRIPT_BASE}?client=${adsenseClient}`;
+const siteUrl = (import.meta.env.PUBLIC_SITE_URL || "").replace(/\/+$/, "");
+const canonicalUrl = siteUrl ? `${siteUrl}${canonicalPath}` : undefined;
+const defaultOgImage = siteUrl ? `${siteUrl}/favicon.svg` : undefined;
+const ogImage = import.meta.env.PUBLIC_OG_IMAGE || defaultOgImage;
+const robotsContent = noindex ? "noindex, nofollow" : "index, follow";
 ---
 
 <!doctype html>
@@ -20,7 +41,25 @@ const {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
+		{keywords ? <meta name="keywords" content={keywords} /> : null}
+		<meta name="robots" content={robotsContent} />
 		<meta name="generator" content={Astro.generator} />
+		<meta property="og:locale" content={lang === "zh-CN" ? "zh_CN" : "en_US"} />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
+		{ogImage ? <meta property="og:image" content={ogImage} /> : null}
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
+		{canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+		{
+			alternateLinks.map((link) => (
+				<link rel="alternate" hreflang={link.hreflang} href={siteUrl ? `${siteUrl}${link.href}` : link.href} />
+			))
+		}
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,8 +67,14 @@ const {
 			href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Sans:wght@400;500;700&display=swap"
 			rel="stylesheet"
 		/>
+		{adsenseScriptSrc ? <script async src={adsenseScriptSrc} crossorigin="anonymous"></script> : null}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js" defer></script>
+		{
+			structuredData ? (
+				<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+			) : null
+		}
 		<title>{title}</title>
 	</head>
 	<body>

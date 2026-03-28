@@ -1,4 +1,4 @@
----
+﻿---
 import ConverterPanel from "../components/ConverterPanel";
 import DownloadPanel from "../components/DownloadPanel";
 import { CONTACT_EMAIL, PRICING_PLANS } from "../config/constants";
@@ -12,12 +12,72 @@ const plans = PRICING_PLANS.map((plan, index) => ({
   ...plan,
   checkoutUrl: checkoutUrls[index] || "#",
 }));
+
+const alternateLinks = [
+  { hreflang: "en", href: "/en/" },
+  { hreflang: "zh-CN", href: "/zh/" },
+  { hreflang: "x-default", href: "/en/" },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "X2MD",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Windows",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      description: "Free online conversion trial and downloadable desktop app.",
+    },
+    description: "Convert documents to Markdown online and with desktop EXE tools.",
+    inLanguage: "en-US",
+    url: "/en/",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: "en-US",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is the free limit?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Each device includes 20 free uses for evaluation.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How soon after payment will I get a key?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "License keys are usually delivered by email within 2 minutes.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How is my data handled?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The service does not store your file information.",
+        },
+      },
+    ],
+  },
+];
 ---
 
 <Layout
   lang="en-US"
-  title="X2MD | Online Document Conversion · Markdown Formatter"
-  description="Free online conversion and desktop EXE download. License keys are emailed automatically after payment."
+  title="X2MD | Online Document Conversion to Markdown"
+  description="Convert DOCX, PPTX, PDF and more to Markdown online. Download Windows EXE for offline conversion and receive license keys by email after checkout."
+  canonicalPath="/en/"
+  keywords="document to markdown, markdown converter, docx to markdown, pptx to markdown, markdown formatter, x2md"
+  alternateLinks={alternateLinks}
+  structuredData={structuredData}
 >
   <main class="page-wrap">
     <section class="hero reveal">
@@ -45,7 +105,7 @@ const plans = PRICING_PLANS.map((plan, index) => ({
             <li>Upload and preview conversions instantly</li>
             <li>Download desktop app (GUI or CLI) for offline use</li>
             <li>Pick a plan and pay via Creem</li>
-            <li>Payment successful → license key auto-emailed</li>
+            <li>Payment successful -> license key auto-emailed</li>
           </ol>
         </div>
       </div>
@@ -96,7 +156,8 @@ const plans = PRICING_PLANS.map((plan, index) => ({
     </section>
 
     <footer class="footer">
-      © {new Date().getFullYear()} X2MD. Fast document conversion to Markdown, stable output, clear licensing.
+      (c) {new Date().getFullYear()} X2MD. Fast document conversion to Markdown, stable output, clear licensing.
     </footer>
   </main>
 </Layout>
+

@@ -33,6 +33,7 @@ PUBLIC_CONVERT_API_BASE=https://api.yourdomain.com
 PUBLIC_CREEM_BASIC_URL=https://creem.io/checkout/your-basic-plan
 PUBLIC_CREEM_PRO_URL=https://creem.io/checkout/your-pro-plan
 PUBLIC_CREEM_LIFETIME_URL=https://creem.io/checkout/your-lifetime-plan
+PUBLIC_ADSENSE_CLIENT=ca-pub-xxxxxxxxxxxxxxxx
 ```
 
 说明：
@@ -53,6 +54,12 @@ PUBLIC_CREEM_LIFETIME_URL=https://creem.io/checkout/your-lifetime-plan
 	- 专业版套餐购买链接。
 - `PUBLIC_CREEM_LIFETIME_URL`
 	- 永久版套餐购买链接。
+- `PUBLIC_ADSENSE_CLIENT`
+	- AdSense client id（例如 `ca-pub-7157539957248921`）。
+	- 默认值在 `src/config/constants.ts` 中维护，可在 `.env` 覆盖。
+- `PUBLIC_ADSENSE_SCRIPT_SRC`
+	- 可选，完整脚本地址覆盖项。
+	- 若设置该值，会优先于 `PUBLIC_ADSENSE_CLIENT`。
 
 Creem 购买流程说明：
 

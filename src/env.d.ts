@@ -5,6 +5,8 @@ interface ImportMetaEnv {
   readonly PUBLIC_CREEM_BASIC_URL?: string;
   readonly PUBLIC_CREEM_PRO_URL?: string;
   readonly PUBLIC_CREEM_LIFETIME_URL?: string;
+  readonly PUBLIC_ADSENSE_CLIENT?: string;
+  readonly PUBLIC_ADSENSE_SCRIPT_SRC?: string;
 }
 
 interface ImportMeta {

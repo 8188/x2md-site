@@ -12,6 +12,10 @@ export const LANG_STORAGE_KEY = "x2md_lang";
 /** 联系邮箱 */
 export const CONTACT_EMAIL = "jsy444@yeah.net";
 
+/** Google AdSense 默认配置（可被 .env 覆盖） */
+export const DEFAULT_ADSENSE_CLIENT = "ca-pub-7157539957248921";
+export const DEFAULT_ADSENSE_SCRIPT_BASE = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+
 /** EXE 下载链接 */
 export const DOWNLOAD_URLS = {
   portable: {
