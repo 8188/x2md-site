@@ -1,7 +1,15 @@
 ﻿---
-import { LANG_STORAGE_KEY } from "../config/constants";
+import {
+  LANG_STORAGE_KEY,
+  DEFAULT_ADSENSE_CLIENT,
+  DEFAULT_ADSENSE_SCRIPT_BASE,
+} from "../config/constants";
 
 const langStorageKey = LANG_STORAGE_KEY;
+const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT || DEFAULT_ADSENSE_CLIENT;
+const adsenseScriptSrc =
+  import.meta.env.PUBLIC_ADSENSE_SCRIPT_SRC ||
+  `${DEFAULT_ADSENSE_SCRIPT_BASE}?client=${adsenseClient}`;
 const alternateLinks = [
   { hreflang: "en", href: "/en/" },
   { hreflang: "zh-CN", href: "/zh/" },
@@ -14,13 +22,14 @@ const alternateLinks = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="index, follow" />
     <title>X2MD</title>
     {
       alternateLinks.map((link) => (
         <link rel="alternate" hreflang={link.hreflang} href={link.href} />
       ))
     }
+    {adsenseScriptSrc ? <script async src={adsenseScriptSrc} crossorigin="anonymous"></script> : null}
     <script define:vars={{ langStorageKey }}>
       (function redirectByLocale() {
         const storageKey = langStorageKey;

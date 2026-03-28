@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { DEFAULT_ADSENSE_CLIENT, DEFAULT_ADSENSE_SCRIPT_BASE } from "../config/constants";
+import { DEFAULT_ADSENSE_CLIENT, DEFAULT_ADSENSE_SCRIPT_BASE, DEFAULT_SITE_URL } from "../config/constants";
 
 interface Props {
 	title?: string;
@@ -28,7 +28,7 @@ const {
 
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT || DEFAULT_ADSENSE_CLIENT;
 const adsenseScriptSrc = import.meta.env.PUBLIC_ADSENSE_SCRIPT_SRC || `${DEFAULT_ADSENSE_SCRIPT_BASE}?client=${adsenseClient}`;
-const siteUrl = (import.meta.env.PUBLIC_SITE_URL || "").replace(/\/+$/, "");
+const siteUrl = (import.meta.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
 const canonicalUrl = siteUrl ? `${siteUrl}${canonicalPath}` : undefined;
 const defaultOgImage = siteUrl ? `${siteUrl}/favicon.svg` : undefined;
 const ogImage = import.meta.env.PUBLIC_OG_IMAGE || defaultOgImage;
