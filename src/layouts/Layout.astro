@@ -43,6 +43,7 @@ const robotsContent = noindex ? "noindex, nofollow" : "index, follow";
 		<meta name="description" content={description} />
 		{keywords ? <meta name="keywords" content={keywords} /> : null}
 		<meta name="robots" content={robotsContent} />
+		<meta name="google-adsense-account" content={adsenseClient} />
 		<meta name="generator" content={Astro.generator} />
 		<meta property="og:locale" content={lang === "zh-CN" ? "zh_CN" : "en_US"} />
 		<meta property="og:type" content={ogType} />
