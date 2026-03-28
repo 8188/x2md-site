@@ -31,7 +31,8 @@ type HealthResponse = {
   maxFileMB?: number;
 };
 
-const defaultApiBase = import.meta.env.PUBLIC_CONVERT_API_BASE || DEFAULT_CONVERT_API_BASE;
+const rawApiBase = import.meta.env.PUBLIC_CONVERT_API_BASE || DEFAULT_CONVERT_API_BASE;
+const defaultApiBase = rawApiBase.replace(/\/+$/, "");
 
 type UiLang = "zh-CN" | "en-US";
 
@@ -188,7 +189,13 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
 
       const converted = await pollJobAndFetchResult(created.id);
       setResult(converted.markdown ?? "");
-      setDownloadUrl(converted.downloadUrl ? `${defaultApiBase}${converted.downloadUrl}` : "");
+      setDownloadUrl(
+        converted.downloadUrl
+          ? converted.downloadUrl.startsWith("http://") || converted.downloadUrl.startsWith("https://")
+            ? converted.downloadUrl
+            : `${defaultApiBase}${converted.downloadUrl}`
+          : ""
+      );
       setResultFileName(converted.outputFileName ?? "");
       setProgress(100);
       setStatus("done");

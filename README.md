@@ -40,11 +40,9 @@ PUBLIC_CREEM_LIFETIME_URL=https://creem.io/checkout/your-lifetime-plan
 - `PUBLIC_CONVERT_API_BASE`
 	- 在线转换 API 的基础地址。
 	- 本地联调 `any2md-site-api` 时建议填：`http://127.0.0.1:8789`。
+	- 部署到 VPS 时，填写你的 API 公网地址（例如 `https://api.x2md.xyz` 或 `http://<VPS_IP>:8789`）。
+	- 建议优先使用 HTTPS 域名；如果前端是 HTTPS 页面，调用 HTTP API 会被浏览器拦截（mixed content）。
 	- 不配置时，在线转换面板会回退为前端 mock 流程。
-- `PUBLIC_RELEASES_API`
-	- 下载区读取版本与下载链接的发布接口地址。
-	- 如果不配置，将使用 `src/config/constants.ts` 中的 `DEFAULT_RELEASES_API`。
-	- 仅在你需要覆盖默认地址时再设置这个变量。
 - 文件大小限制
 	- 前端不再维护独立大小阈值。
 	- 统一读取后端 `/health` 返回的 `maxFileMB`，该值由 `any2md-site-api` 的 `DEFAULT_MAX_FILE_MB`（或 `MAX_FILE_MB` 环境变量）控制。
