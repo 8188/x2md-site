@@ -10,7 +10,7 @@ export const DEFAULT_CONVERT_API_BASE = "";
 export const LANG_STORAGE_KEY = "x2md_lang";
 
 /** 联系邮箱 */
-export const CONTACT_EMAIL = "jsy444@yeah.net";
+export const CONTACT_EMAIL = "support@x2md.xyz";
 
 /** Google AdSense 默认配置（可被 .env 覆盖） */
 export const DEFAULT_ADSENSE_CLIENT = "ca-pub-7157539957248921";
