@@ -33,8 +33,8 @@ export default function DownloadPanel({ lang = "zh-CN" }: DownloadPanelProps) {
       <p style={{ marginTop: 0, color: "var(--ink-soft)" }}>
         {t(
           lang,
-          "每台设备 20 次试用。GUI 版支持右键菜单快捷转换和批量处理，CLI 版可被大模型驱动。",
-          "20 free uses per device. GUI supports context menu shortcuts and batch conversion. CLI can be driven by AI models."
+          "GUI 版支持右键菜单快捷转换，CLI 版可被大模型驱动。EXE 可免费试用 20 次。",
+          "GUI supports context menu shortcuts, and CLI can be driven by AI models. EXE includes 20 free trial uses."
         )}
       </p>
 

@@ -1,7 +1,7 @@
 ﻿---
 import ConverterPanel from "../components/ConverterPanel";
 import DownloadPanel from "../components/DownloadPanel";
-import { CONTACT_EMAIL, PRICING_PLANS } from "../config/constants";
+import { CONTACT_EMAIL, PRICING_PLANS, DEFAULT_SITE_URL } from "../config/constants";
 import Layout from "../layouts/Layout.astro";
 
 const creemBasic = import.meta.env.PUBLIC_CREEM_BASIC_URL || "#";
@@ -18,6 +18,7 @@ const alternateLinks = [
   { hreflang: "zh-CN", href: "/zh/" },
   { hreflang: "x-default", href: "/en/" },
 ];
+const siteUrl = (import.meta.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
 
 const structuredData = [
   {
@@ -30,11 +31,11 @@ const structuredData = [
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
-      description: "Free online conversion trial and downloadable desktop app.",
+      description: "Free online conversion forever, plus downloadable desktop app for better experience.",
     },
-    description: "Convert documents to Markdown online and with desktop EXE tools.",
+    description: "Convert documents to Markdown online forever for free, with desktop EXE for faster and more stable workflows.",
     inLanguage: "en-US",
-    url: "/en/",
+    url: `${siteUrl}/en/`,
   },
   {
     "@context": "https://schema.org",
@@ -43,10 +44,10 @@ const structuredData = [
     mainEntity: [
       {
         "@type": "Question",
-        name: "What is the free limit?",
+        name: "Is online conversion free to use?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Each device includes 20 free uses for evaluation.",
+          text: "Yes. Online conversion is free to use long-term.",
         },
       },
       {
@@ -72,8 +73,8 @@ const structuredData = [
 
 <Layout
   lang="en-US"
-  title="X2MD | Online Document Conversion to Markdown"
-  description="Convert DOCX, PPTX, PDF and more to Markdown online. Download Windows EXE for offline conversion and receive license keys by email after checkout."
+  title="X2MD | Online Document and Markdown Converter"
+  description="Convert DOCX, PPTX, PDF and more to Markdown, and convert Markdown to DOCX/PDF. Download Windows EXE for a better conversion experience."
   canonicalPath="/en/"
   keywords="document to markdown, markdown converter, docx to markdown, pptx to markdown, markdown formatter, x2md"
   alternateLinks={alternateLinks}
@@ -83,19 +84,19 @@ const structuredData = [
     <section class="hero reveal">
       <div class="hero-grid">
         <div>
-          <span class="hero-badge">Free Online Trial · Desktop License Upgrade</span>
-          <h1>Documents to Markdown in one click.</h1>
+          <span class="hero-badge">Free Online Forever · Desktop for Better Experience</span>
+          <h1>Convert between documents and Markdown in one click.</h1>
           <p>
-            X2MD converts DOCX, PPTX, Excel, and more. Try online free, download desktop for offline work.
-            20 free uses per device, then auto-deliver license keys via email after purchase.
+            X2MD converts DOCX, PPTX, Excel, and more. Use online conversion for free, and download desktop EXE for faster,
+            offline, and batch workflows.
           </p>
           <div class="action-row">
-            <a class="btn btn-primary" href="#convert">Start Converting</a>
+            <a class="btn btn-primary btn-pulse-once" href="#convert">Start Converting</a>
             <a class="btn btn-ghost" href="#download">Download EXE</a>
           </div>
           <div class="hero-stats">
-            <div class="stat"><strong>20 uses</strong>free trial quota per device</div>
-            <div class="stat"><strong>2 minutes</strong>typical delivery after payment</div>
+            <div class="stat"><strong>Forever Free</strong>online conversion available anytime</div>
+            <div class="stat"><strong>Desktop EXE</strong>better speed, offline use, and batching</div>
             <div class="stat"><strong>14+ formats</strong>planned in phased rollout</div>
           </div>
         </div>
@@ -128,6 +129,7 @@ const structuredData = [
         {
           plans.map((plan) => (
             <article class={`plan${plan.highlight ? " plan-highlight" : ""}`}>
+              {plan.highlight ? <span class="plan-badge">Recommended</span> : null}
               <h3>{plan.name_en}</h3>
               <div class="price-row">
                 <span class="price-old">${plan.price_old}</span>
@@ -148,7 +150,7 @@ const structuredData = [
     <section class="surface section reveal" style="animation-delay: 380ms;">
       <h2>FAQ</h2>
       <div style="display: grid; gap: 0.7rem; color: var(--ink-soft)">
-        <div><strong>What is the free limit?</strong> 20 uses per device for evaluation.</div>
+        <div><strong>Is online conversion free to use?</strong> Yes, online conversion is free to use long-term.</div>
         <div><strong>How soon after payment will I get a key?</strong> Usually within 2 minutes by email.</div>
         <div><strong>How is my data handled?</strong> We never store your file information.</div>
         <div><strong>Questions?</strong> Contact us at <a href={`mailto:${CONTACT_EMAIL}`} style="color: var(--brand); text-decoration: none; font-weight: 500;">{CONTACT_EMAIL}</a></div>

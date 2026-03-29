@@ -65,6 +65,7 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
   );
   const [isDragging, setIsDragging] = useState(false);
   const [isPointerOver, setIsPointerOver] = useState(false);
+  const [isResultFlash, setIsResultFlash] = useState(false);
   const dragDepthRef = useRef(0);
   const blobUrlRef = useRef<string>("");
 
@@ -89,6 +90,13 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (status !== "done") return;
+    setIsResultFlash(true);
+    const timer = window.setTimeout(() => setIsResultFlash(false), 400);
+    return () => window.clearTimeout(timer);
+  }, [status, result, resultFileName, downloadUrl]);
 
   useEffect(() => {
     let disposed = false;
@@ -321,8 +329,8 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
       <p style={{ marginTop: 0, color: "var(--ink-soft)" }}>
         {t(
           lang,
-          "每台设备 20 次试用。支持拖拽或点击上传，选择目标格式后自动转换。完全免费不需激活码。",
-          "20 free uses per device. Drag or click to upload, select target format, and download. No license required for trial."
+          "支持拖拽或点击上传，选择目标格式后自动转换。",
+          "Drag or click to upload, then choose a target format to convert."
         )}
       </p>
 
@@ -485,7 +493,18 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
           </div>
         </div>
 
-        <div className="surface" style={{ padding: "1rem", display: "flex", flexDirection: "column", height: "100%" }}>
+        <div
+          className="surface"
+          style={{
+            padding: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            borderColor: isResultFlash ? "var(--brand)" : "var(--border)",
+            boxShadow: isResultFlash ? "0 0 0 3px rgba(14,138,114,0.2), 0 24px 36px rgba(14,138,114,0.2)" : "var(--shadow)",
+            transition: "border-color 0.4s ease, box-shadow 0.4s ease",
+          }}
+        >
           <div style={{ fontWeight: 700, marginBottom: "0.65rem" }}>{t(lang, "转换结果", "Conversion Result")}</div>
           <textarea
             value={result}

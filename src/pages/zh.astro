@@ -1,7 +1,7 @@
 ﻿---
 import ConverterPanel from "../components/ConverterPanel";
 import DownloadPanel from "../components/DownloadPanel";
-import { CONTACT_EMAIL, PRICING_PLANS } from "../config/constants";
+import { CONTACT_EMAIL, PRICING_PLANS, DEFAULT_SITE_URL } from "../config/constants";
 import Layout from "../layouts/Layout.astro";
 
 const creemBasic = import.meta.env.PUBLIC_CREEM_BASIC_URL || "#";
@@ -18,6 +18,7 @@ const alternateLinks = [
   { hreflang: "en", href: "/en/" },
   { hreflang: "x-default", href: "/en/" },
 ];
+const siteUrl = (import.meta.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
 
 const structuredData = [
   {
@@ -30,11 +31,11 @@ const structuredData = [
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
-      description: "支持在线免费试用与桌面端下载。",
+      description: "支持在线永久免费使用，桌面端下载可获得更好体验。",
     },
-    description: "在线将文档转换为 Markdown，并支持 Windows 桌面离线转换。",
+    description: "在线永久免费将文档转换为 Markdown，下载 Windows EXE 可获得更快、更稳、更完整的体验。",
     inLanguage: "zh-CN",
-    url: "/zh/",
+    url: `${siteUrl}/zh/`,
   },
   {
     "@context": "https://schema.org",
@@ -43,10 +44,10 @@ const structuredData = [
     mainEntity: [
       {
         "@type": "Question",
-        name: "免费额度是多少？",
+        name: "在线转换是永久免费的吗？",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "每台设备可免费试用 20 次。",
+          text: "是的，在线转换支持长期免费使用。",
         },
       },
       {
@@ -72,8 +73,8 @@ const structuredData = [
 
 <Layout
   lang="zh-CN"
-  title="X2MD | 在线文档转 Markdown 工具"
-  description="支持 DOCX、PPTX、PDF 等文档在线转 Markdown。可下载 Windows EXE 离线使用，支付后授权码自动邮件发送。"
+  title="X2MD | 在线文档与 Markdown 互转工具"
+  description="支持 DOCX、PPTX、PDF 等文档转 Markdown，也支持 Markdown 转 DOCX/PDF。可下载 Windows EXE 获得更佳转换体验。"
   canonicalPath="/zh/"
   keywords="文档转markdown, markdown转换器, docx转markdown, pptx转markdown, 在线转换, x2md"
   alternateLinks={alternateLinks}
@@ -83,19 +84,19 @@ const structuredData = [
     <section class="hero reveal">
       <div class="hero-grid">
         <div>
-          <span class="hero-badge">在线免费试用 · 桌面端授权升级</span>
-          <h1>一键将文档转换为 Markdown</h1>
+          <span class="hero-badge">在线永久免费使用 · 下载 EXE 获得更好体验</span>
+          <h1>一键实现文档与 Markdown 互转</h1>
           <p>
-            X2MD 支持 DOCX、PPTX、Excel 等常见格式。可先在线免费体验，再下载桌面版离线使用。
-            每台设备可试用 20 次，支付后授权码自动发送到邮箱。
+            X2MD 支持 DOCX、PPTX、Excel 等常见格式。在线可永久免费使用；下载桌面版 EXE 可获得更快速度、
+            离线可用与批量处理等更好体验。
           </p>
           <div class="action-row">
-            <a class="btn btn-primary" href="#convert">立即在线转换</a>
+            <a class="btn btn-primary btn-pulse-once" href="#convert">立即在线转换</a>
             <a class="btn btn-ghost" href="#download">下载 EXE</a>
           </div>
           <div class="hero-stats">
-            <div class="stat"><strong>20 次</strong>每台设备免费试用</div>
-            <div class="stat"><strong>2 分钟</strong>支付后常见发码时间</div>
+            <div class="stat"><strong>永久免费</strong>在线转换可随时使用</div>
+            <div class="stat"><strong>桌面 EXE</strong>速度更快，离线与批量更省心</div>
             <div class="stat"><strong>14+ 格式</strong>分阶段持续支持</div>
           </div>
         </div>
@@ -128,6 +129,7 @@ const structuredData = [
         {
           plans.map((plan) => (
             <article class={`plan${plan.highlight ? " plan-highlight" : ""}`}>
+              {plan.highlight ? <span class="plan-badge">推荐</span> : null}
               <h3>{plan.name_zh}</h3>
               <div class="price-row">
                 <span class="price-old">${plan.price_old}</span>
@@ -148,7 +150,7 @@ const structuredData = [
     <section class="surface section reveal" style="animation-delay: 380ms;">
       <h2>常见问题</h2>
       <div style="display: grid; gap: 0.7rem; color: var(--ink-soft)">
-        <div><strong>在线免费版限制？</strong> 每台设备总计 20 次，适合先评估效果。</div>
+        <div><strong>在线转换是否永久免费？</strong> 是的，在线转换支持长期免费使用。</div>
         <div><strong>支付后多久收到授权码？</strong> 通常 2 分钟内邮件送达。</div>
         <div><strong>数据隐私如何保障？</strong> 我们不会保存你的文件信息。</div>
         <div><strong>还有问题？</strong> 联系我们：<a href={`mailto:${CONTACT_EMAIL}`} style="color: var(--brand); text-decoration: none; font-weight: 500;">{CONTACT_EMAIL}</a></div>
