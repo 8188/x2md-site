@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import { DEFAULT_ADSENSE_CLIENT, DEFAULT_ADSENSE_SCRIPT_BASE, DEFAULT_SITE_URL } from "../config/constants";
 
+import Header from "../components/Header.astro";
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -15,8 +17,8 @@ interface Props {
 }
 
 const {
-	title = "any2md | Online Conversion and Desktop License",
-	description = "Free online conversion and desktop download. License key is sent by email after purchase.",
+	title = "X2MD | Online Document to Markdown Converter",
+	description = "X2MD supports converting DOCX, PDF, and PPTX to Markdown. Free online and desktop download for Windows.",
 	lang = "en-US",
 	canonicalPath = "/",
 	keywords,
@@ -33,6 +35,18 @@ const canonicalUrl = siteUrl ? `${siteUrl}${canonicalPath}` : undefined;
 const defaultOgImage = siteUrl ? `${siteUrl}/favicon.svg` : undefined;
 const ogImage = import.meta.env.PUBLIC_OG_IMAGE || defaultOgImage;
 const robotsContent = noindex ? "noindex, nofollow" : "index, follow";
+
+const legalLinks = lang === "zh-CN" 
+	? [
+		{ href: "/zh/about", label: "关于我们" },
+		{ href: "/zh/privacy", label: "隐私政策" },
+		{ href: "/zh/terms", label: "服务条款" },
+	]
+	: [
+		{ href: "/en/about", label: "About" },
+		{ href: "/en/privacy", label: "Privacy" },
+		{ href: "/en/terms", label: "Terms" },
+	];
 ---
 
 <!doctype html>
@@ -82,7 +96,73 @@ const robotsContent = noindex ? "noindex, nofollow" : "index, follow";
 	</head>
 	<body>
 		<div id="vanta-bg" aria-hidden="true"></div>
+		<Header lang={lang} />
 		<slot />
+		
+		<footer class="site-footer">
+			<div class="footer-container">
+				<div class="footer-info">
+					<p>© {new Date().getFullYear()} X2MD. All rights reserved.</p>
+					<p class="footer-tagline">Stabilized and efficient Document to Markdown solution.</p>
+				</div>
+				<nav class="footer-nav">
+					{legalLinks.map(link => (
+						<a href={link.href}>{link.label}</a>
+					))}
+				</nav>
+			</div>
+		</footer>
+
+		<style is:global>
+			.site-footer {
+				margin-top: 4rem;
+				border-top: 1px solid var(--border);
+				padding: 2.5rem 0;
+				background: rgba(255, 252, 245, 0.5);
+				position: relative;
+				z-index: 2;
+			}
+			.footer-container {
+				max-width: 1180px;
+				margin: 0 auto;
+				padding: 0 1rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 1.5rem;
+			}
+			.footer-info p {
+				margin: 0;
+				color: var(--ink-soft);
+				font-size: 0.9rem;
+			}
+			.footer-tagline {
+				opacity: 0.8;
+				font-size: 0.8rem !important;
+				margin-top: 0.3rem !important;
+			}
+			.footer-nav {
+				display: flex;
+				gap: 1.5rem;
+			}
+			.footer-nav a {
+				text-decoration: none;
+				font-size: 0.9rem;
+				color: var(--ink-soft);
+				transition: color 0.2s;
+			}
+			.footer-nav a:hover {
+				color: var(--brand);
+			}
+			@media (max-width: 640px) {
+				.footer-container {
+					flex-direction: column;
+					text-align: center;
+				}
+			}
+		</style>
+
 		<script>
 			(function initVantaBirds() {
 				const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

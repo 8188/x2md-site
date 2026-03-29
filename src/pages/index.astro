@@ -1,76 +1,115 @@
-﻿---
+---
 import {
   LANG_STORAGE_KEY,
   DEFAULT_ADSENSE_CLIENT,
   DEFAULT_ADSENSE_SCRIPT_BASE,
   DEFAULT_SITE_URL,
 } from "../config/constants";
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import logoImg from "../assets/X2MD.png";
 
 const langStorageKey = LANG_STORAGE_KEY;
 const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT || DEFAULT_ADSENSE_CLIENT;
-const adsenseScriptSrc =
-  import.meta.env.PUBLIC_ADSENSE_SCRIPT_SRC ||
-  `${DEFAULT_ADSENSE_SCRIPT_BASE}?client=${adsenseClient}`;
 const siteUrl = (import.meta.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
-const canonicalUrl = `${siteUrl}/`;
 const title = "X2MD | Online Document to Markdown Converter";
-const description =
-  "Convert DOCX, PPTX, PDF and more to Markdown online. Download X2MD desktop EXE for offline conversion.";
-const ogImage = `${siteUrl}/favicon.svg`;
-const alternateLinks = [
-  { hreflang: "en", href: "/en/" },
-  { hreflang: "zh-CN", href: "/zh/" },
-  { hreflang: "x-default", href: "/en/" },
-];
+const description = "Convert DOCX, PDF, and PPTX to Markdown online for free. Fast, reliable, and privacy-focused conversion tool.";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <meta name="keywords" content="document to markdown, markdown converter, docx to markdown, pptx to markdown, x2md" />
-    <meta name="robots" content="index, follow" />
-    <meta name="google-adsense-account" content={adsenseClient} />
-    <link rel="canonical" href={canonicalUrl} />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={ogImage} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <title>{title}</title>
-    {
-      alternateLinks.map((link) => (
-        <link rel="alternate" hreflang={link.hreflang} href={`${siteUrl}${link.href}`} />
-      ))
-    }
-    {adsenseScriptSrc ? <script async src={adsenseScriptSrc} crossorigin="anonymous"></script> : null}
-    <script define:vars={{ langStorageKey }}>
-      (function redirectByLocale() {
-        const storageKey = langStorageKey;
-        const query = new URLSearchParams(window.location.search);
-        const fromQuery = query.get("lang");
-        const saved = window.localStorage.getItem(storageKey);
-        const detected = (fromQuery || saved || navigator.language || "en").toLowerCase();
+<Layout title={title} description={description} lang="en-US">
+  <main class="page-wrap index-hero">
+    <div class="hero-content reveal">
+      <Image src={logoImg} alt="X2MD Logo" width={120} height={120} class="main-logo" />
+      <h1>Welcome to X2MD</h1>
+      <p class="tagline">The most efficient way to convert your documents to Markdown.</p>
+      
+      <div class="language-selection">
+        <a href="/en/" class="btn btn-primary">English Version</a>
+        <a href="/zh/" class="btn btn-ghost">中文版本</a>
+      </div>
 
-        const target = detected.startsWith("zh") ? "/zh/" : "/en/";
-        if (fromQuery === "zh" || fromQuery === "en") {
-          window.localStorage.setItem(storageKey, fromQuery);
-        }
+      <div class="features-summary">
+        <div class="feat">
+          <h3>Online & Free</h3>
+          <p>Convert your files directly in the browser without any cost.</p>
+        </div>
+        <div class="feat">
+          <h3>Desktop App</h3>
+          <p>Download our Windows EXE for batch processing and offline use.</p>
+        </div>
+        <div class="feat">
+          <h3>Privacy</h3>
+          <p>We process files in memory and never store your data.</p>
+        </div>
+      </div>
+    </div>
+  </main>
 
-        window.location.replace(target);
-      })();
-    </script>
-  </head>
-  <body>
-    <p>Redirecting...</p>
-    <p><a href="/zh/">中文</a> | <a href="/en/">English</a></p>
-  </body>
-</html>
+  <script define:vars={{ langStorageKey }}>
+    (function autoRedirect() {
+      const saved = window.localStorage.getItem(langStorageKey);
+      if (saved === 'zh' || saved === 'en') {
+        window.location.href = '/' + saved + '/';
+        return;
+      }
+      
+      const query = new URLSearchParams(window.location.search);
+      if (query.has('lang')) return; // Don't redirect if manually selecting
+
+      const detected = (navigator.language || "en").toLowerCase();
+      if (detected.startsWith("zh")) {
+        // We don't auto-redirect on index anymore to satisfy AdSense, 
+        // but we could if we wanted to. Better to let user/crawler see this page.
+      }
+    })();
+  </script>
+</Layout>
+
+<style>
+  .index-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  .main-logo {
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+  }
+  .hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: 0;
+    color: var(--ink);
+  }
+  .tagline {
+    font-size: 1.25rem;
+    color: var(--ink-soft);
+    margin: 1rem 0 2.5rem;
+  }
+  .language-selection {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 4rem;
+  }
+  .features-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: left;
+    border-top: 1px solid var(--border);
+    padding-top: 3rem;
+  }
+  .feat h3 {
+    margin: 0 0 0.5rem;
+    color: var(--brand);
+    font-size: 1.2rem;
+  }
+  .feat p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+</style>

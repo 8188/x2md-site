@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { CONTACT_EMAIL } from "../../config/constants";
+---
+
+<Layout title="隐私政策 | X2MD" lang="zh-CN" canonicalPath="/zh/privacy">
+  <main class="page-wrap section-content">
+    <h1>隐私政策</h1>
+    <p>最近更新日期：2026年3月29日</p>
+    
+    <p>在 X2MD，我们非常重视您的隐私。本政策说明了您在使用我们的在线转换服务和桌面端应用时，我们如何处理您的数据。</p>
+
+    <h2>1. 数据收集</h2>
+    <p>在线转换服务无需用户注册。除非您通过邮件联系我们或购买授权码，否则我们不会收集您的个人信息。</p>
+
+    <h2>2. 文件处理</h2>
+    <p>当您上传文件进行在线转换时，文件仅在内存中处理以生成 Markdown 输出。我们不会存储、复制或共享您上传的文件。转换完成且您下载结果后，数据将从我们的临时处理环境中彻底清除。</p>
+
+    <h2>3. 桌面端应用</h2>
+    <p>X2MD 桌面端应用在您的本地计算机上处理文件。在本地转换过程中，任何文件数据都不会发送到我们的服务器。</p>
+
+    <h2>4. Cookie</h2>
+    <p>我们使用少量的 Cookie 或本地存储来记住您的语言偏好，并辅助授权流程的进行。</p>
+
+    <h2>5. 联系方式</h2>
+    <p>如有任何隐私相关疑问，请联系：<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>。</p>
+  </main>
+</Layout>
+
+<style>
+  .section-content {
+    padding: 4rem 1rem;
+    max-width: 800px;
+    line-height: 1.6;
+  }
+  h1 { font-size: 2.5rem; margin-bottom: 2rem; }
+  h2 { margin-top: 2rem; color: var(--brand); }
+</style>

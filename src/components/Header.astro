@@ -1,0 +1,99 @@
+---
+import { Image } from "astro:assets";
+import logoImg from "../assets/X2MD.png";
+
+interface Props {
+  lang?: "zh-CN" | "en-US";
+}
+
+const { lang = "en-US" } = Astro.props;
+
+const navLinks = lang === "zh-CN" 
+  ? [
+      { href: "/zh/#convert", label: "在线转换" },
+      { href: "/zh/#download", label: "下载软件" },
+      { href: "/zh/#pricing", label: "授权套餐" },
+    ]
+  : [
+      { href: "/en/#convert", label: "Online" },
+      { href: "/en/#download", label: "Download" },
+      { href: "/en/#pricing", label: "Pricing" },
+    ];
+
+const langSwitch = lang === "zh-CN" 
+  ? { href: "/en/", label: "English" }
+  : { href: "/zh/", label: "中文" };
+---
+
+<header class="site-header">
+  <div class="header-container">
+    <a href={lang === "zh-CN" ? "/zh/" : "/en/"} class="logo-link">
+      <Image src={logoImg} alt="X2MD Logo" height={32} />
+      <span class="brand-name">X2MD</span>
+    </a>
+    <nav class="nav-links">
+      {navLinks.map(link => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+      <a href={langSwitch.href} class="lang-toggle">{langSwitch.label}</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: rgba(255, 252, 245, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 900;
+    font-size: 1.25rem;
+    font-family: "Archivo", sans-serif;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover {
+    color: var(--brand);
+  }
+  .lang-toggle {
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: #fff;
+  }
+  @media (max-width: 640px) {
+    .nav-links {
+      gap: 0.8rem;
+    }
+    .nav-links a:not(.lang-toggle) {
+      display: none;
+    }
+  }
+</style>

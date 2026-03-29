@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { CONTACT_EMAIL } from "../../config/constants";
+---
+
+<Layout title="关于我们 | X2MD" lang="zh-CN" canonicalPath="/zh/about">
+  <main class="page-wrap section-content">
+    <h1>关于 X2MD</h1>
+    <p>X2MD 是一款功能强大的文档转换工具，旨在弥合传统文档格式与现代 Markdown 工作流之间的鸿沟。</p>
+    
+    <h2>我们的使命</h2>
+    <p>我们的使命是提供最快、最可靠、最简便的方法，将 DOCX、PDF、PPTX 等格式转换为结构清晰、格式良好的 Markdown。我们致力于为作家、开发者和研究人员提供尊重时间与隐私的优质工具。</p>
+
+    <h2>为什么选择 X2MD？</h2>
+    <ul>
+      <li><strong>精准度：</strong> 高保真转换，完整保留文档结构、表格和图像。</li>
+      <li><strong>效率：</strong> 在线转换满足即时需求，桌面端应用支持大规模批量处理。</li>
+      <li><strong>隐私至上：</strong> 我们在内存中处理您的文件并直接输出结果，绝不在服务器上存储您的敏感数据。</li>
+    </ul>
+
+    <h2>联系我们</h2>
+    <p>如果您有任何问题或反馈，请通过邮件联系我们：<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>。</p>
+  </main>
+</Layout>
+
+<style>
+  .section-content {
+    padding: 4rem 1rem;
+    max-width: 800px;
+    line-height: 1.6;
+  }
+  h1 { font-size: 2.5rem; margin-bottom: 2rem; }
+  h2 { margin-top: 2rem; color: var(--brand); }
+  ul { padding-left: 1.2rem; }
+  li { margin-bottom: 0.5rem; }
+</style>

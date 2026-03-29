@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { CONTACT_EMAIL } from "../../config/constants";
+---
+
+<Layout title="Privacy Policy | X2MD" lang="en-US" canonicalPath="/en/privacy">
+  <main class="page-wrap section-content">
+    <h1>Privacy Policy</h1>
+    <p>Last Updated: March 29, 2026</p>
+    
+    <p>At X2MD, we take your privacy seriously. This policy describes how we handle your data when you use our online converter and desktop application.</p>
+
+    <h2>1. Data Collection</h2>
+    <p>We do not require user registration for online conversion. We do not collect personal information unless you contact us directly via email or purchase a license key.</p>
+
+    <h2>2. File Processing</h2>
+    <p>When you upload a file for online conversion, the file is processed in memory to generate the Markdown output. We do not store, copy, or share your uploaded files. Once the conversion is complete and you have downloaded the result, the data is purged from our temporary processing environment.</p>
+
+    <h2>3. Desktop Application</h2>
+    <p>The X2MD desktop application processes files locally on your machine. No file data is sent to our servers during local conversion.</p>
+
+    <h2>4. Cookies</h2>
+    <p>We use minimal cookies or local storage to remember your language preferences and to facilitate the licensing process.</p>
+
+    <h2>5. Contact</h2>
+    <p>For any privacy-related inquiries, please contact us at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+  </main>
+</Layout>
+
+<style>
+  .section-content {
+    padding: 4rem 1rem;
+    max-width: 800px;
+    line-height: 1.6;
+  }
+  h1 { font-size: 2.5rem; margin-bottom: 2rem; }
+  h2 { margin-top: 2rem; color: var(--brand); }
+</style>

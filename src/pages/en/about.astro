@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { CONTACT_EMAIL } from "../../config/constants";
+---
+
+<Layout title="About Us | X2MD" lang="en-US" canonicalPath="/en/about">
+  <main class="page-wrap section-content">
+    <h1>About X2MD</h1>
+    <p>X2MD is a powerful document conversion tool designed to bridge the gap between traditional document formats and modern Markdown workflows.</p>
+    
+    <h2>Our Mission</h2>
+    <p>Our mission is to provide the fastest, most reliable, and easiest way to convert DOCX, PDF, PPTX, and other formats into clean, well-formatted Markdown. We believe in empowering writers, developers, and researchers with tools that respect their time and privacy.</p>
+
+    <h2>Why X2MD?</h2>
+    <ul>
+      <li><strong>Precision:</strong> High-fidelity conversion that preserves structures, tables, and images.</li>
+      <li><strong>Efficiency:</strong> Online conversion for quick tasks, and a desktop app for heavy batch processing.</li>
+      <li><strong>Privacy First:</strong> We process your files and deliver results without storing your sensitive data on our servers.</li>
+    </ul>
+
+    <h2>Contact Us</h2>
+    <p>If you have any questions or feedback, please reach out to us at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+  </main>
+</Layout>
+
+<style>
+  .section-content {
+    padding: 4rem 1rem;
+    max-width: 800px;
+    line-height: 1.6;
+  }
+  h1 { font-size: 2.5rem; margin-bottom: 2rem; }
+  h2 { margin-top: 2rem; color: var(--brand); }
+  ul { padding-left: 1.2rem; }
+  li { margin-bottom: 0.5rem; }
+</style>
