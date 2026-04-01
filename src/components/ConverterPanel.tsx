@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { DEFAULT_CONVERT_API_BASE } from "../config/constants";
 
 type JobStatus = "idle" | "uploading" | "converting" | "done" | "error";
-type OutputTarget = "md" | "docx" | "pdf";
+type OutputTarget = "md" | "docx" | "pdf" | "xlsx";
 
 type CreateJobResponse = {
   success?: boolean;
@@ -72,7 +72,7 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
   const fileExt = useMemo(() => (file ? extFromName(file.name) : "-"), [file]);
 
   const allowedTargets = useMemo<OutputTarget[]>(() => {
-    if (fileExt === "md") return ["docx", "pdf", "md"];
+    if (fileExt === "md") return ["docx", "pdf", "xlsx", "md"];
     if (["docx", "pptx", "pdf", "xlsx", "xls", "csv", "txt"].includes(fileExt)) return ["md"];
     return ["md"];
   }, [fileExt]);
@@ -425,6 +425,9 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
               <option value="pdf" disabled={!allowedTargets.includes("pdf")}>
                 PDF (.pdf){!allowedTargets.includes("pdf") ? t(lang, "（仅 md 输入可选）", " (md input only)") : ""}
               </option>
+              <option value="xlsx" disabled={!allowedTargets.includes("xlsx")}>
+                Excel (.xlsx){!allowedTargets.includes("xlsx") ? t(lang, "（仅 md 输入可选）", " (md input only)") : ""}
+              </option>
             </select>
           </div>
 
@@ -511,8 +514,8 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
             onChange={(e) => setResult(e.target.value)}
             placeholder={t(
               lang,
-              "目标是 Markdown 时，这里会显示文本结果；DOCX/PDF 请点击下载。",
-              "Markdown text appears here when target is Markdown. For DOCX/PDF, click Download."
+              "目标是 Markdown 时，这里会显示文本结果；DOCX/PDF/Excel 请点击下载。",
+              "Markdown text appears here when target is Markdown. For DOCX/PDF/Excel, click Download."
             )}
             style={{
               flex: 1,

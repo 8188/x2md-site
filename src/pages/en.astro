@@ -33,9 +33,28 @@ const structuredData = [
       priceCurrency: "USD",
       description: "Free online conversion forever, plus downloadable desktop app for better experience.",
     },
-    description: "Convert documents to Markdown online forever for free, with desktop EXE for faster and more stable workflows.",
+    description: "Convert Word/DOCX, PDF, Excel tables, and PPTX to Markdown, and convert Markdown to DOCX, PDF, and Excel.",
     inLanguage: "en-US",
     url: `${siteUrl}/en/`,
+    featureList: [
+      "Word to Markdown",
+      "DOCX to Markdown",
+      "PDF to Markdown",
+      "Excel to Markdown",
+      "Table to Markdown",
+      "PPTX to Markdown",
+      "Markdown to DOCX",
+      "Markdown to PDF",
+      "Markdown to Excel",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "X2MD",
+    url: `${siteUrl}/en/`,
+    inLanguage: "en-US",
+    description: "Online converter for Word/DOCX, PDF, Excel table, PPTX and Markdown bidirectional workflows.",
   },
   {
     "@context": "https://schema.org",
@@ -73,10 +92,10 @@ const structuredData = [
 
 <Layout
   lang="en-US"
-  title="X2MD | Online Document and Markdown Converter"
-  description="Convert DOCX, PPTX, PDF and more to Markdown, and convert Markdown to DOCX/PDF. Download Windows EXE for a better conversion experience."
+  title="X2MD | Word/DOCX, PDF, Excel, PPTX to Markdown and Markdown to DOCX/PDF/Excel"
+  description="Convert Word/DOCX, PDF, Excel tables, and PPTX to Markdown, and convert Markdown to DOCX, PDF, and Excel online."
   canonicalPath="/en/"
-  keywords="document to markdown, markdown converter, docx to markdown, pptx to markdown, markdown formatter, x2md"
+  keywords="word to markdown, docx to markdown, pdf to markdown, excel to markdown, table to markdown, pptx to markdown, markdown to docx, markdown to pdf, markdown to excel, markdown converter, x2md"
   alternateLinks={alternateLinks}
   structuredData={structuredData}
 >
@@ -87,8 +106,8 @@ const structuredData = [
           <span class="hero-badge">Free Online Forever · Desktop for Better Experience</span>
           <h1>Convert between documents and Markdown in one click.</h1>
           <p>
-            X2MD converts DOCX, PPTX, Excel, and more. Use online conversion for free, and download desktop EXE for faster,
-            offline, and batch workflows.
+            X2MD converts Word/DOCX, PDF, Excel tables, and PPTX to Markdown, and also converts Markdown to DOCX, PDF, and Excel.
+            Use online conversion for free, and download desktop EXE for faster, offline, and batch workflows.
           </p>
           <div class="action-row">
             <a class="btn btn-primary btn-pulse-once" href="#convert">Start Converting</a>
@@ -118,6 +137,14 @@ const structuredData = [
 
     <section id="download">
       <DownloadPanel client:load lang="en-US" />
+    </section>
+
+    <section class="surface section reveal" style="animation-delay: 290ms;">
+      <h2>Supported Conversion Intents</h2>
+      <p style="margin-top: 0; color: var(--ink-soft)">
+        Common search intents we cover include Word to Markdown, DOCX to Markdown, PDF to Markdown, Excel table to Markdown,
+        PPTX to Markdown, and reverse paths like Markdown to DOCX, Markdown to PDF, and Markdown to Excel.
+      </p>
     </section>
 
     <section class="surface section reveal" style="animation-delay: 320ms;" id="pricing">

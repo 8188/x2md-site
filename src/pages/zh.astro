@@ -33,9 +33,28 @@ const structuredData = [
       priceCurrency: "USD",
       description: "支持在线永久免费使用，桌面端下载可获得更好体验。",
     },
-    description: "在线永久免费将文档转换为 Markdown，下载 Windows EXE 可获得更快、更稳、更完整的体验。",
+    description: "支持 Word/DOCX、PDF、Excel表格、PPTX 转 Markdown，也支持 Markdown 转 DOCX/PDF/Excel。",
     inLanguage: "zh-CN",
     url: `${siteUrl}/zh/`,
+    featureList: [
+      "Word转Markdown",
+      "DOCX转Markdown",
+      "PDF转Markdown",
+      "Excel转Markdown",
+      "表格转Markdown",
+      "PPTX转Markdown",
+      "Markdown转DOCX",
+      "Markdown转PDF",
+      "Markdown转Excel",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "X2MD",
+    url: `${siteUrl}/zh/`,
+    inLanguage: "zh-CN",
+    description: "面向 Word/DOCX、PDF、Excel表格、PPTX 与 Markdown 的双向在线转换。",
   },
   {
     "@context": "https://schema.org",
@@ -73,10 +92,10 @@ const structuredData = [
 
 <Layout
   lang="zh-CN"
-  title="X2MD | 在线文档与 Markdown 互转工具"
-  description="支持 DOCX、PPTX、PDF 等文档转 Markdown，也支持 Markdown 转 DOCX/PDF。可下载 Windows EXE 获得更佳转换体验。"
+  title="X2MD | Word/DOCX、PDF、Excel、PPTX 与 Markdown 双向转换"
+  description="支持 Word/DOCX、PDF、Excel表格、PPTX 转 Markdown，也支持 Markdown 转 DOCX、PDF、Excel。"
   canonicalPath="/zh/"
-  keywords="文档转markdown, markdown转换器, docx转markdown, pptx转markdown, 在线转换, x2md"
+  keywords="word转md, docx转md, pdf转md, excel转md, 表格转md, pptx转md, md转word, md转docx, md转pdf, md转excel, markdown转换器, 在线转换, x2md"
   alternateLinks={alternateLinks}
   structuredData={structuredData}
 >
@@ -87,8 +106,8 @@ const structuredData = [
           <span class="hero-badge">在线永久免费使用 · 下载 EXE 获得更好体验</span>
           <h1>一键实现文档与 Markdown 互转</h1>
           <p>
-            X2MD 支持 DOCX、PPTX、Excel 等常见格式。在线可永久免费使用；下载桌面版 EXE 可获得更快速度、
-            离线可用与批量处理等更好体验。
+            X2MD 支持 Word/DOCX、PDF、Excel表格、PPTX 转 Markdown，也支持 Markdown 转 DOCX、PDF、Excel。
+            在线可永久免费使用；下载桌面版 EXE 可获得更快速度、离线可用与批量处理等更好体验。
           </p>
           <div class="action-row">
             <a class="btn btn-primary btn-pulse-once" href="#convert">立即在线转换</a>
@@ -118,6 +137,14 @@ const structuredData = [
 
     <section id="download">
       <DownloadPanel client:load lang="zh-CN" />
+    </section>
+
+    <section class="surface section reveal" style="animation-delay: 290ms;">
+      <h2>覆盖的常见搜索意图</h2>
+      <p style="margin-top: 0; color: var(--ink-soft)">
+        覆盖 Word转Markdown、DOCX转Markdown、PDF转Markdown、Excel/表格转Markdown、PPTX转Markdown，
+        以及反向的 Markdown转DOCX、Markdown转PDF、Markdown转Excel 等高频需求。
+      </p>
     </section>
 
     <section class="surface section reveal" style="animation-delay: 320ms;" id="pricing">
