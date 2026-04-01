@@ -1,21 +1,5 @@
 import { DOWNLOAD_URLS } from "../config/constants";
 
-type DownloadRelease = {
-  version: string;
-  downloadUrl: string;
-};
-
-const FIXED_RELEASES: { portable: DownloadRelease; cli: DownloadRelease } = {
-  portable: {
-    version: "lastest",
-    downloadUrl: "https://pub-6956b8ec162a4b9ab00d059bd5a042be.r2.dev/releases/any2md-0.1.0-x64-portable.exe",
-  },
-  cli: {
-    version: "lastest",
-    downloadUrl: "https://pub-6956b8ec162a4b9ab00d059bd5a042be.r2.dev/releases/any2md-0.1.0-x64-portable-cli.exe",
-  },
-};
-
 type UiLang = "zh-CN" | "en-US";
 
 interface DownloadPanelProps {

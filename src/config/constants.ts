@@ -18,15 +18,18 @@ export const DEFAULT_ADSENSE_SCRIPT_BASE = "https://pagead2.googlesyndication.co
 /** 站点主域名（公开信息，可按需被 .env 覆盖） */
 export const DEFAULT_SITE_URL = "https://www.x2md.xyz";
 
+/** EXE 下载版本（优先从环境变量读取，由于 Astro 的限制，客户端代码需使用 PUBLIC_ 前缀） */
+export const X2MD_VERSION = import.meta.env.PUBLIC_X2MD_VERSION || "0.1.0";
+
 /** EXE 下载链接 */
 export const DOWNLOAD_URLS = {
   portable: {
-    version: "latest",
-    url: "https://pub-6956b8ec162a4b9ab00d059bd5a042be.r2.dev/releases/any2md-0.1.0-x64-portable.exe",
+    version: X2MD_VERSION,
+    url: `https://pub-6956b8ec162a4b9ab00d059bd5a042be.r2.dev/releases/X2MD-${X2MD_VERSION}-x64-portable.exe`,
   },
   cli: {
-    version: "latest",
-    url: "https://pub-6956b8ec162a4b9ab00d059bd5a042be.r2.dev/releases/any2md-0.1.0-x64-portable-cli.exe",
+    version: X2MD_VERSION,
+    url: `https://pub-6956b8ec162a4b9ab00d059bd5a042be.r2.dev/releases/X2MD-${X2MD_VERSION}-x64-portable-cli.exe`,
   },
 };
 

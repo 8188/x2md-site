@@ -1,6 +1,6 @@
-# any2md-site
+# X2MD-site
 
-基于 Astro + React Islands 的 any2md 官网。
+基于 Astro + React Islands 的 X2MD 官网。
 
 目标：
 
@@ -17,7 +17,7 @@
 ## 本地开发
 
 ```powershell
-cd d:\Documents\TypeScript\Website\any2md-site
+cd d:\Documents\TypeScript\Website\X2MD-site
 pnpm install
 pnpm dev
 ```
@@ -40,13 +40,13 @@ PUBLIC_ADSENSE_CLIENT=ca-pub-xxxxxxxxxxxxxxxx
 
 - `PUBLIC_CONVERT_API_BASE`
 	- 在线转换 API 的基础地址。
-	- 本地联调 `any2md-site-api` 时建议填：`http://127.0.0.1:8789`。
+	- 本地联调 `X2MD-site-api` 时建议填：`http://127.0.0.1:8789`。
 	- 部署到 VPS 时，填写你的 API 公网地址（例如 `https://api.x2md.xyz` 或 `http://<VPS_IP>:8789`）。
 	- 建议优先使用 HTTPS 域名；如果前端是 HTTPS 页面，调用 HTTP API 会被浏览器拦截（mixed content）。
 	- 不配置时，在线转换面板会回退为前端 mock 流程。
 - 文件大小限制
 	- 前端不再维护独立大小阈值。
-	- 统一读取后端 `/health` 返回的 `maxFileMB`，该值由 `any2md-site-api` 的 `DEFAULT_MAX_FILE_MB`（或 `MAX_FILE_MB` 环境变量）控制。
+	- 统一读取后端 `/health` 返回的 `maxFileMB`，该值由 `X2MD-site-api` 的 `DEFAULT_MAX_FILE_MB`（或 `MAX_FILE_MB` 环境变量）控制。
 - `PUBLIC_CREEM_BASIC_URL`
 	- 基础版套餐购买链接。
 	- 你提供的 Creem test 链接可填在这里用于测试。
