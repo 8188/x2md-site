@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import FeedbackForm from "../../components/FeedbackForm";
+
+const alternateLinks = [
+  { hreflang: "zh-CN", href: "/zh/feedback" },
+  { hreflang: "en", href: "/en/feedback" },
+  { hreflang: "x-default", href: "/en/feedback" },
+];
+---
+
+<Layout
+  lang="zh-CN"
+  title="反馈意见 | X2MD"
+  description="提交 X2MD 的问题反馈、功能建议与截图，我们会通过邮件接收并跟进处理。"
+  canonicalPath="/zh/feedback"
+  keywords="x2md反馈, markdown转换反馈, 功能建议, 问题反馈"
+  alternateLinks={alternateLinks}
+>
+  <main class="page-wrap">
+    <section class="hero reveal">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-badge">反馈直达邮箱</span>
+          <h1>提交反馈意见</h1>
+          <p>
+            欢迎提交功能建议、错误报告和使用体验。支持文字和截图，我们会通过邮件接收并持续优化。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <FeedbackForm client:load lang="zh-CN" />
+  </main>
+</Layout>

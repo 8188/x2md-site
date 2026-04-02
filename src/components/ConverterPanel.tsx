@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { DEFAULT_CONVERT_API_BASE } from "../config/constants";
 
 type JobStatus = "idle" | "uploading" | "converting" | "done" | "error";
-type OutputTarget = "md" | "docx" | "pdf" | "xlsx";
+type OutputTarget = "md" | "docx" | "pdf" | "xlsx" | "epub";
 
 type CreateJobResponse = {
   success?: boolean;
@@ -72,8 +72,8 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
   const fileExt = useMemo(() => (file ? extFromName(file.name) : "-"), [file]);
 
   const allowedTargets = useMemo<OutputTarget[]>(() => {
-    if (fileExt === "md") return ["docx", "pdf", "xlsx", "md"];
-    if (["docx", "pptx", "pdf", "xlsx", "xls", "csv", "txt"].includes(fileExt)) return ["md"];
+    if (fileExt === "md") return ["docx", "pdf", "xlsx", "epub", "md"];
+    if (["docx", "pptx", "pdf", "xlsx", "xls", "csv", "txt", "epub"].includes(fileExt)) return ["md"];
     return ["md"];
   }, [fileExt]);
 
@@ -428,6 +428,9 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
               <option value="xlsx" disabled={!allowedTargets.includes("xlsx")}>
                 Excel (.xlsx){!allowedTargets.includes("xlsx") ? t(lang, "（仅 md 输入可选）", " (md input only)") : ""}
               </option>
+              <option value="epub" disabled={!allowedTargets.includes("epub")}>
+                EPUB (.epub){!allowedTargets.includes("epub") ? t(lang, "（仅 md 输入可选）", " (md input only)") : ""}
+              </option>
             </select>
           </div>
 
@@ -449,6 +452,16 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
                 lang,
                 "PPTX 转 MD 的保留图片功能在线版暂不可用。请下载桌面版 EXE 使用完整功能。",
                 "Keep-images option for PPTX to MD is unavailable online. Download desktop EXE for full capability."
+              )}
+            </div>
+          )}
+
+          {fileExt === "epub" && target === "md" && (
+            <div style={{ color: "var(--danger)", marginBottom: "0.6rem", fontSize: "0.92rem" }}>
+              {t(
+                lang,
+                "EPUB 转 MD 的保留图片功能在线版暂不可用。请下载桌面版 EXE 使用完整功能。",
+                "Keep-images option for EPUB to MD is unavailable online. Download desktop EXE for full capability."
               )}
             </div>
           )}
@@ -514,8 +527,8 @@ export default function ConverterPanel({ lang = "zh-CN" }: ConverterPanelProps) 
             onChange={(e) => setResult(e.target.value)}
             placeholder={t(
               lang,
-              "目标是 Markdown 时，这里会显示文本结果；DOCX/PDF/Excel 请点击下载。",
-              "Markdown text appears here when target is Markdown. For DOCX/PDF/Excel, click Download."
+              "目标是 Markdown 时，这里会显示文本结果；DOCX/PDF/Excel/EPUB 请点击下载。",
+              "Markdown text appears here when target is Markdown. For DOCX/PDF/Excel/EPUB, click Download."
             )}
             style={{
               flex: 1,

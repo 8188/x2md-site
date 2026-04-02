@@ -18,7 +18,7 @@ interface Props {
 
 const {
 	title = "X2MD | Online Document to Markdown Converter",
-	description = "X2MD converts Word/DOCX, PDF, Excel tables, and PPTX to Markdown, and converts Markdown back to DOCX, PDF, and Excel. Free online with desktop app for Windows.",
+	description = "X2MD converts Word/DOCX, PDF, Excel tables, PPTX, and EPUB to Markdown, and converts Markdown back to DOCX, PDF, Excel, and EPUB. Free online with desktop app for Windows.",
 	lang = "en-US",
 	canonicalPath = "/",
 	keywords,
@@ -41,11 +41,13 @@ const legalLinks = lang === "zh-CN"
 		{ href: "/zh/about", label: "关于我们" },
 		{ href: "/zh/privacy", label: "隐私政策" },
 		{ href: "/zh/terms", label: "服务条款" },
+		{ href: "/zh/feedback", label: "反馈意见" },
 	]
 	: [
 		{ href: "/en/about", label: "About" },
 		{ href: "/en/privacy", label: "Privacy" },
 		{ href: "/en/terms", label: "Terms" },
+		{ href: "/en/feedback", label: "Feedback" },
 	];
 ---
 

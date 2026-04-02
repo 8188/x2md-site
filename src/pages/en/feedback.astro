@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import FeedbackForm from "../../components/FeedbackForm";
+
+const alternateLinks = [
+  { hreflang: "en", href: "/en/feedback" },
+  { hreflang: "zh-CN", href: "/zh/feedback" },
+  { hreflang: "x-default", href: "/en/feedback" },
+];
+---
+
+<Layout
+  lang="en-US"
+  title="Feedback | X2MD"
+  description="Send bug reports, feature requests, and screenshots for X2MD. Feedback is delivered to us by email."
+  canonicalPath="/en/feedback"
+  keywords="x2md feedback, markdown converter feedback, feature request, bug report"
+  alternateLinks={alternateLinks}
+>
+  <main class="page-wrap">
+    <section class="hero reveal">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-badge">Delivered to Email</span>
+          <h1>Send Feedback</h1>
+          <p>
+            Share feature requests, bug reports, and usage issues. Text and screenshot attachments are supported.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <FeedbackForm client:load lang="en-US" />
+  </main>
+</Layout>
